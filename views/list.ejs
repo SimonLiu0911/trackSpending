@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>列表</title>
+</head>
+
+<body>
+  <h1>添加紀錄</h1>
+  <form
+    action="/account"
+    method="post"
+  >
+    <div>
+      <label for="title">事項</label>
+      <input
+        type="text"
+        id="title"
+        name="title"
+      >
+    </div>
+    <div>
+      <label for="time">發生時間</label>
+      <input
+        type="date"
+        id="time"
+        name="time"
+      >
+    </div>
+    <div>
+      <label for="type">類型</label>
+      <select name="type" id="type">
+        <option value="-1">支出</option>
+        <option value="1">收入</option>
+      </select>
+    </div>
+    <div>
+      <label for="account">金額</label>
+      <input
+        type="text"
+        id="account"
+        name="account"
+      >
+    </div>
+    <div>
+      <label for="remark">備註</label>
+      <input
+        type="text"
+        id="remark"
+        name="remark"
+      >
+    </div>
+    <button type="submit">添加</button>
+  </form>
+</body>
+
+</html>
