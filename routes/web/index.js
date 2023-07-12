@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const shortid = require('shortid');
 const moment = require('moment');
-const AccountModel = require('../models/AccountModel');
+const AccountModel = require('../../models/AccountModel');
 
 router.get('/account', (req, res, next) => {
   AccountModel.find().sort({ time: -1 }).exec()

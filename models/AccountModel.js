@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
+
 const AccountSchema = new mongoose.Schema({
   title: {
     type: String,
     require: true
   },
-  time: Date,
+  time: { type: Date },
   type: {
     type: Number,
     default: -1
