@@ -44,7 +44,6 @@ app.use('/api', accountRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  console.log(1);
   next(createError(404));
 });
 

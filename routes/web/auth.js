@@ -17,7 +17,10 @@ router.post('/register', (req, res) => {
   };
   UserModel.create(data)
     .then((result) => {
-      res.render('success', { msg: '註冊成功', url: '/login' })
+      res.render('success', {
+        msg: '註冊成功',
+        url: '/login'
+      })
     })
     .catch((err) => res.status(500).send('這冊失敗'))
 })
@@ -37,8 +40,12 @@ router.post('/login', (req, res) => {
   UserModel.findOne(data)
     .then((result) => {
       if (result === null) return res.send('號密碼錯誤');
-
-      res.render('account/account');
+      console.log(result);
+      res.render('success', {
+        msg: 'success to login',
+        url: '/account'
+      });
+      // 寫入session
       req.session.username = result.username;
       req.session._id = result._id;
     })
@@ -46,5 +53,15 @@ router.post('/login', (req, res) => {
       console.log(err);
     })
 });
+
+// logout
+router.get('/logout', (req, res) => {
+  req.session.destroy(() => {
+    res.render('success', {
+      msg: 'success to logout',
+      url: '/login'
+    })
+  })
+})
 
 module.exports = router;
