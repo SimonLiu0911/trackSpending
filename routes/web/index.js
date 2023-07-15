@@ -14,7 +14,7 @@ router.get('/account', (req, res, next) => {
         }
       })
       console.log(accounts);
-      res.render('account', { accounts });
+      res.render('account/account', { accounts });
     })
     .catch((err) => {
       res.status(500).send('讀取失敗~~~')
@@ -22,7 +22,7 @@ router.get('/account', (req, res, next) => {
 });
 
 router.get('/account/create', (req, res, next) => {
-  res.render('list');
+  res.render('account/list');
 });
 
 router.post('/account', (req, res, next) => {
