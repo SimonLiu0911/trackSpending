@@ -40,14 +40,16 @@ router.post('/login', (req, res) => {
   UserModel.findOne(data)
     .then((result) => {
       if (result === null) return res.send('號密碼錯誤');
-      console.log(result);
+
+      // 寫入session
+      req.session.username = result.username;
+      req.session._id = result._id;
+
       res.render('success', {
         msg: 'success to login',
         url: '/account'
       });
-      // 寫入session
-      req.session.username = result.username;
-      req.session._id = result._id;
+
     })
     .catch((err) => {
       console.log(err);
@@ -55,7 +57,8 @@ router.post('/login', (req, res) => {
 });
 
 // logout
-router.get('/logout', (req, res) => {
+router.post('/logout', (req, res) => {
+  console.log(1);
   req.session.destroy(() => {
     res.render('success', {
       msg: 'success to logout',

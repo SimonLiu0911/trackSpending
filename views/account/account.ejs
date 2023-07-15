@@ -6,7 +6,9 @@
   <title>Document</title>
 </head>
 <body>
-  <a href="/logout">logout</a>
+  <form action="/logout" method="POST">
+    <button type="submit">logout</button>
+  </form>
   <ul>
     <% accounts.forEach((item) => { %>
     <li>
