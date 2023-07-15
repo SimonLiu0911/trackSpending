@@ -15,14 +15,14 @@ const accountRouter = require('./routes/api/account');
 const app = express();
 
 app.use(session({
-  name: 'sid',
-  secret: 'atguigu',
-  saveUninitialized: false,
-  resave: true,
-  store: MongoStore.create({
+  name: 'sid', // 儲存 sessionID 的那個 Cookie 的名稱
+  secret: 'test', // 用來認證該 Session 的資料。
+  saveUninitialized: false, // 是否強制將未初始化的 Session 儲存至 Store。（新產生的 Session）
+  resave: true, // 即使 Session 沒做變動，是否強制重新儲存進 Store。
+  store: MongoStore.create({ // 儲存 Session 的地方
     mongoUrl: `mongodb://${DBHOST}:${DBPORT}/${DBNAME}`
   }),
-  cookie: {
+  cookie: { // 儲存 sessionID 的 Cookie 的形式。
     httpOnly: true,
     maxAge: 1000 * 60 * 60 * 24 * 7
   }
