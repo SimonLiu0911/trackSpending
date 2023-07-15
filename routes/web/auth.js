@@ -58,7 +58,6 @@ router.post('/login', (req, res) => {
 
 // logout
 router.post('/logout', (req, res) => {
-  console.log(1);
   req.session.destroy(() => {
     res.render('success', {
       msg: 'success to logout',

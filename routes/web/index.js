@@ -6,6 +6,10 @@ const { checkLoginMiddleware } = require('../../middleware');
 
 const router = express.Router();
 
+router.get('/', (req, res) => {
+  res.redirect('/account');
+})
+
 router.get('/account', checkLoginMiddleware, (req, res, next) => {
   AccountModel.find().sort({ time: -1 }).exec()
     .then((result) => {
