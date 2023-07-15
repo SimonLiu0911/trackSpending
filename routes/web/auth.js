@@ -1,14 +1,15 @@
 const express = require('express');
-const router = express.Router();
 const UserModel = require('../../models/UserModel');
 const md5 = require('md5');
 
+const router = express.Router();
+
 // 註冊
-router.get('/reg', (req, res) => {
-  res.render('auth/reg');
+router.get('/register', (req, res) => {
+  res.render('auth/register');
 });
 
-router.post('/reg', (req, res) => {
+router.post('/register', (req, res) => {
   // password 加密
   const data = {
     ...req.body,
@@ -37,7 +38,9 @@ router.post('/login', (req, res) => {
     .then((result) => {
       if (result === null) return res.send('號密碼錯誤');
 
-      res.render('success', { msg: '登錄成功', url: '/login' });
+      res.render('account/account');
+      req.session.username = result.username;
+      req.session._id = result._id;
     })
     .catch((err) => {
       console.log(err);
