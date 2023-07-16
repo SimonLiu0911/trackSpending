@@ -2,11 +2,12 @@ const express = require('express');
 const moment = require('moment');
 const shortid = require('shortid');
 const AccountModel = require('../../models/AccountModel');
+const { checkTokenMiddleware } = require('../../middleware');
 
 const router = express.Router();
 
-// 獲取帳單列表
-router.get('/account', (req, res, next) => {
+// get account list
+router.get('/account', checkTokenMiddleware, (req, res, next) => {
   AccountModel.find().sort({ time: -1 }).exec()
     .then((result) => {
       res.json({
@@ -23,8 +24,8 @@ router.get('/account', (req, res, next) => {
     })
 });
 
-// 獲取單個帳單
-router.get('/account/:id', (req, res, next) => {
+// get single account
+router.get('/account/:id', checkTokenMiddleware,(req, res, next) => {
   const { id } = req.params;
 
   AccountModel.findById(id)
@@ -42,20 +43,20 @@ router.get('/account/:id', (req, res, next) => {
     })
 })
 
-// 更新帳單
-router.patch('/account/:id', (req, res, next) => {
+// update account
+router.patch('/account/:id', checkTokenMiddleware, (req, res, next) => {
   const { id } = req.params;
 
   AccountModel.updateOne({ _id: id }, req.body)
     .then((result) => {
       AccountModel.findById(id)
-      .then((data) => {
-        res.json({
-          code: '0',
-          msg: 'success',
-          data
+        .then((data) => {
+          res.json({
+            code: '0',
+            msg: 'success',
+            data
+          })
         })
-      })
     })
     .catch((err) => {
       res.json({
@@ -65,8 +66,8 @@ router.patch('/account/:id', (req, res, next) => {
     })
 })
 
-// 新增數據
-router.post('/account', (req, res, next) => {
+// create account
+router.post('/account', checkTokenMiddleware, (req, res, next) => {
   const data = {
     ...req.body,
     time: moment(req.body.time).toDate()
@@ -88,8 +89,8 @@ router.post('/account', (req, res, next) => {
     })
 });
 
-// 刪除紀錄
-router.delete('/account/:id', (req, res, next) => {
+// delete account
+router.delete('/account/:id', checkTokenMiddleware, (req, res, next) => {
   const { id } = req.params;
 
   AccountModel.deleteOne({ _id: id })

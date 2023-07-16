@@ -4,11 +4,12 @@ const md5 = require('md5');
 
 const router = express.Router();
 
-// 註冊
+// register
 router.get('/register', (req, res) => {
   res.render('auth/register');
 });
 
+// register
 router.post('/register', (req, res) => {
   // password 加密
   const data = {
@@ -25,12 +26,12 @@ router.post('/register', (req, res) => {
     .catch((err) => res.status(500).send('這冊失敗'))
 })
 
-// 註冊
+// login
 router.get('/login', (req, res) => {
   res.render('auth/login');
 });
 
-// 登錄
+// login
 router.post('/login', (req, res) => {
   const { username, password } = req.body;
   const data = {
