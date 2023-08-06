@@ -14,6 +14,7 @@ const accountRouter = require('./routes/api/account');
 
 const app = express();
 
+// https://ithelp.ithome.com.tw/articles/10228375
 app.use(session({
   name: 'sid', // 儲存 sessionID 的那個 Cookie 的名稱
   secret: 'test', // 用來認證該 Session 的資料。
