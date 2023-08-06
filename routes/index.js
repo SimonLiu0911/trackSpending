@@ -1,8 +1,8 @@
 const express = require('express');
 const shortid = require('shortid');
 const moment = require('moment');
-const AccountModel = require('../../models/AccountModel');
-const { checkLoginMiddleware } = require('../../middleware');
+const AccountModel = require('../models/AccountModel');
+const { checkLoginMiddleware } = require('../middleware');
 
 const router = express.Router();
 
